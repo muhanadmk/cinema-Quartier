@@ -1,0 +1,41 @@
+$bg-Primary: #02224B;
+$bg-secondaire: #546592;
+$third-bgcolor: #C4C4C4;
+html {
+	height: 100%;
+  body {
+    height: 100%;
+    display : table;
+    width: 100%;
+  }
+}
+
+.bg-secondaire{
+  background-color: $bg-secondaire;
+}
+.bg-Primary{
+  background-color: $bg-Primary;
+}
+.third-bgcolor{
+  background-color: $third-bgcolor;
+}
+.imgContainer{
+  background-color: $bg-Primary;
+}
+.imgContainer img {
+  width: 100%;
+}
+.footer_parent{
+  display : table-row;
+  height: 20%;
+}
+
+.hed2{
+  width: 100%;
+  padding: 25px;
+  background-color: coral !important;
+  color: white !important;
+  font-size: 25px !important;
+  box-sizing: border-box !important;
+
+}
