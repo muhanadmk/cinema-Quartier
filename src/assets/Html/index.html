@@ -28,9 +28,6 @@
               <a class="nav-link active rounded-1 third-bgcolor" aria-current="page" href="index.html">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="film.html">filme</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link active" href="Tarifs.html">Tarifs</a>
             </li>
             <li class="nav-item">
@@ -38,6 +35,15 @@
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="panier.html">Panier</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Administration</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                <li><a class="dropdown-item" href="#">films projetés</a></li>
+                <li><a class="dropdown-item" href="#">Ajout d'un film à projeter</a></li>
+                <li><a class="dropdown-item" href="#">Liste des programmations </a></li>
+                <li><a class="dropdown-item" href="#">Ajout d'une programmation </a></li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -61,21 +67,35 @@
 
         <div class="col-sm-12 col-md-6">
           <h1>Ciné Marmots</h1>
-        <p class="margTop">25 rue alsace lorraine <br />Nancy 54000</p>
+        <p>25 rue alsace lorraine <br />Nancy 54000</p>
         <section>
-          <h2 class="margTop">programmation des films de la semaine</h2>
-          <article class="margTop">
-            EN ATTENDANT BOJANGLES : Mardi 08 Février 20:40 (fin 22:59)
-          </article>
-          <article class="margTop">
-            EN ATTENDANT BOJANGLES : Mardi 08 Février 20:40 (fin 22:59)
-          </article>
-          <article class="margTop">
-            EN ATTENDANT BOJANGLES : Mardi 08 Février 20:40 (fin 22:59)
-          </article>
-          <article class="margTop">
-            EN ATTENDANT BOJANGLES : Mardi 08 Février 20:40 (fin 22:59)
-          </article>
+          <h2>programmation des films de la semaine</h2>
+          <ul class="listFilme">
+            <li class="">
+              <a id="btn"  class="nav-link active fs-4 "href="film.html?t=The+Dark+Knight" >The Dark Knight</a>
+              <ul class="listFilme d-flex justify-content-between listTimeFime">
+                <li>Mardi 08 Février 20:40</li>
+                <li>mercredi 09 Février 20:40</li>
+                <li>dimanche  13 Février 20:40 </li>
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link active fs-4" href="film.html?t=The+Intouchables"> The Intouchables </a>
+              <ul class="listFilme d-flex justify-content-between listTimeFime">
+                <li>Mardi 08 Février 20:40</li>
+                <li>mercredi 09 Février 20:40</li>
+                <li>dimanche  13 Février 20:40 </li>
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link active fs-4" href="film.html?t=Sweet+November">Sweet November</a>
+              <ul class="listFilme d-flex justify-content-between listTimeFime">
+                <li>Mardi 08 Février 20:40</li>
+                <li>mercredi 09 Février 20:40</li>
+                <li>dimanche  13 Février 20:40 </li>
+              </ul>
+            </li>
+          </ul>
         </section>
         </div>
 
@@ -104,16 +124,8 @@
 
   <!-- End footer de la page -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-    crossorigin="anonymous"></script>
 
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
