@@ -21,21 +21,36 @@ html {
 }
 .imgContainer{
   background-color: $bg-Primary;
+  img {
+    width: 100%;
+  }
 }
-.imgContainer img {
-  width: 100%;
+.listFilme{
+  list-style: none;
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+  .listTimeFime{
+    background-color:  $third-bgcolor;
+    color: #000;
+  }
+    @media (max-width: 992px) { 
+      .listTimeFime{
+        flex-direction: column;
+      }
+     }
+  
+}
+
+.fromBorderErr {
+  border: 3px solid red;
+}
+
+input:focus {
+  outline: none;
 }
 .footer_parent{
   display : table-row;
   height: 20%;
-}
-
-.hed2{
-  width: 100%;
-  padding: 25px;
-  background-color: coral !important;
-  color: white !important;
-  font-size: 25px !important;
-  box-sizing: border-box !important;
-
 }
