@@ -1,12 +1,13 @@
 //pour etre sur que tous les elemnets de la page bien telecharger
 const lengthMax = 40;
 const inseteErr = document.querySelector(".form-input");
+let condtionErrEmail;
 // pour insérer dedans les inputs de from
 const persone = {
   nom: "",
   prenom: "",
   email: "",
-  dateDeNaissance: Date,
+  dateDeNaissance: "",
   address: {
     nomRue: "",
     numeroRue: "",
@@ -14,6 +15,7 @@ const persone = {
     ville: "",
   },
 };
+
 window.addEventListener("DOMContentLoaded", () => {
   main();
 });
@@ -23,16 +25,14 @@ function main() {
   // on cliqe on test les input de la from et on les recuperer
   btnSubmit.addEventListener("click", (event) => {
     event.preventDefault();
-    const body = document.querySelector("#bodybg");
-    getNom();
+     getNom();
     getPrenom();
-    getDate();
-    getmEmail();
+     getDate();
+     getmEmail();
     getNomRue();
     getNumeroRue();
     getCp();
     getVille();
-    console.log(persone);
   });
 }
 
@@ -44,15 +44,18 @@ const getNom = () => {
     !(lengthMax > nom.value.length) ||
     !nom.value.trim()
   ) {
-    const nomErr = document.querySelector("#nomErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText =
-      "le nom doit etre de 2 caractères minimum et 40 maximum";
-    nomErr.appendChild(sepanErr);
-    injecterMsgErr(nom, sepanErr);
-    return false;
+    const element = document.querySelector(`#nomErr span`);
+    if(element == null){
+      injecteMsgErrHtml(
+        "le nom doit etre de 2 caractères minimum et 40 maximum",
+        nom,
+        "#nomErr"
+      );
+      return false;
+    }
   } else {
     persone.nom = nom.value;
+    return true;
   }
 };
 
@@ -64,14 +67,19 @@ const getPrenom = () => {
     !(lengthMax > prenom.value.length) ||
     !prenom.value.trim()
   ) {
-    const prenomErr = document.querySelector("#prenomErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText =
-      "le prenom doit etre de 2 caractères minimum et 40 maximum";
-    prenomErr.appendChild(sepanErr);
-    injecterMsgErr(prenom, sepanErr);
+    const element = document.querySelector(`#prenomErr span`);
+    if(element == null){
+      injecteMsgErrHtml(
+        "le prenom doit etre de 2 caractères minimum et 40 maximum",
+        prenom,
+        "#prenomErr"
+      );
+      return false;
+    }
   } else {
+    prenom.setCustomValidity("");
     persone.prenom = prenom.value;
+    return true;
   }
 };
 
@@ -82,20 +90,20 @@ function getDate() {
   const dateDeNaissanceFromat = new Date(dateDeNaissance.value);
   const date18YrsAgo = new Date();
   date18YrsAgo.setFullYear(date18YrsAgo.getFullYear() - 18);
-  //alert(date18YrsAgo);
-  // alert(dateDeNaissanceFromat);
-  if (
-    dateDeNaissanceFromat.getFullYear() <= date18YrsAgo.getFullYear() &&
-    dateDeNaissanceFromat.getMonth() >= date18YrsAgo.getMonth() &&
-    dateDeNaissanceFromat.getDate() >= date18YrsAgo.getDate()
-  ) {
-    persone.dateDeNaissance = dateDeNaissance.value;
+  if (dateDeNaissanceFromat <= date18YrsAgo) {
+    persone.dateDeNaissance = dateDeNaissanceFromat.toString();
+    return true;
   } else {
-    const dateErr = document.querySelector("#dateErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText = "vous devez être majeur au jour de linscription";
-    dateErr.appendChild(sepanErr);
-    injecterMsgErr(dateDeNaissance, sepanErr);
+    const element = document.querySelector(`#dateErr span`);
+    if(element == null){
+      injecteMsgErrHtml(
+        "vous devez être majeur au jour de linscription",
+        dateDeNaissance,
+        "#dateErr"
+      );
+      return false;
+    }
+    return false;
   }
 }
 
@@ -103,15 +111,28 @@ function getDate() {
 
 const getmEmail = () => {
   const email = document.querySelector("#email");
-  if (regExEmail(email.value)) {
+  const emailCon = document.querySelector("#emailCon");
+  const fromBorderErr = document.querySelector("#borderErrEmail");
+  const element = document.querySelector(`#borderErrEmail span`);
+  let msgErrEmail = "";
+  if (email.value !== emailCon.value) {
+    msgErrEmail = " vous deovez ecreir la  meme e-mail ";
+    if(element == null){
+      injecteMsgErrHtml(msgErrEmail, fromBorderErr, "#email", true);
+    }
+    return false;
+  }else if (regExEmail(email.value)) {
     persone.email = email.value;
+    condtionErrEmail = false;
+    return true;
   } else {
-    const emailErr = document.querySelector("#emailErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText = "vous deovez ecreir un bon fromat de le e-mail";
-    emailErr.appendChild(sepanErr);
-    injecterMsgErr(email, sepanErr);
+    msgErrEmail = " Vous devez écrire un bon format d'email comme ee@ee.eee ";
+    if(element == null){
+      injecteMsgErrHtml(msgErrEmail, fromBorderErr, "#email", true);
+    }
+    return false;
   }
+  
 };
 
 // regex test s'il ya un point et @ dans le e-email
@@ -121,67 +142,115 @@ const regExEmail = (email) => {
 
 // functions de l'address pour ne pas etre vide our null
 const getNomRue = () => {
+  
   const nomRue = document.querySelector("#nomRue");
   if (nomRue.value == null || !nomRue.value.trim()) {
-    const nomRueErr = document.querySelector("#nomRueErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText = "Ce champ est obligatoire, vous devez le remplir.";
-    nomRueErr.appendChild(sepanErr);
-    injecterMsgErr(nomRue, sepanErr);
+    const element = document.querySelector(`#nomRueErr span`);
+    if(element == null){
+      injecteMsgErrHtml(
+        "Ce champ est obligatoire, vous devez le remplir.",
+        nomRue,
+        "#nomRueErr"
+      );  
+      return false;
+    }
+    
+    return false;
   } else {
     persone.address.nomRue = nomRue.value;
+    return true;
   }
 };
 
 const getNumeroRue = () => {
   const numeroRue = document.querySelector("#numeroRue");
   if (numeroRue.value == null || !numeroRue.value.trim()) {
-    const numeroRueErr = document.querySelector("#numeroRueErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText = "Ce champ est obligatoire, vous devez le remplir.";
-    numeroRueErr.appendChild(sepanErr);
-    injecterMsgErr(numeroRue, sepanErr);
+    const element = document.querySelector(`#numeroRue span`);
+    if(element == null){
+      injecteMsgErrHtml(
+        "Ce champ est obligatoire, vous devez le remplir.",
+        numeroRue,
+        "#numeroRue"
+      );
+      return false;
+    }
   } else {
     persone.address.numeroRue = numeroRue.value;
+    return true;
   }
 };
 
 const getCp = () => {
   const cp = document.querySelector("#cp");
   if (cp.value == null || !cp.value.trim()) {
-    const cpErr = document.querySelector("#cpErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText = "cpErr";
-    cpErr.appendChild(sepanErr);
-    injecterMsgErr(cp, sepanErr);
+    const element = document.querySelector(`#cpErr span`);
+    if(element == null){
+      injecteMsgErrHtml(
+        "Ce champ est obligatoire, vous devez le remplir.",
+        cp,
+        "#cpErr"
+      );
+      return false;
+    }
   } else {
     persone.address.cp = cp.value;
+    return true;
   }
 };
 
 const getVille = () => {
   const ville = document.querySelector("#ville");
   if (ville.value == null || !ville.value.trim()) {
-    const villeErr = document.querySelector("#villeErr");
-    const sepanErr = document.createElement("span");
-    sepanErr.innerText = "Ce champ est obligatoire, vous devez le remplir.";
-    villeErr.appendChild(sepanErr);
-    injecterMsgErr(ville, sepanErr);
+    const element = document.querySelector(`#villeErr span`);
+    if(element == null){
+      const villeErr = document.querySelector("#villeErr");
+      injecteMsgErrHtml(
+        "Ce champ est obligatoire, vous devez le remplir.",
+        ville,
+        "#villeErr"
+      );
+      return false;
+    }
   } else {
     persone.address.ville = ville.value;
+    return true;
   }
 };
 
-// Fonction pour afficher une msg de err
-function injecterMsgErr(inputTag, sepanErrElmenet) {
-  inputTag.className += " fromBorderErr";
-  supprimeMsgErr(inputTag, sepanErrElmenet);
-}
-
 //supprimer msg de err lorsque on focus sur l'input
 function supprimeMsgErr(inputTag, sepanErrElmenet) {
-  inputTag.addEventListener("focus", (event) => {
+   inputTag.addEventListener("focus", (event) => {
     inputTag.classList.remove("fromBorderErr");
+    sepanErrElmenet.remove();
+  });
+}
+
+//Pour injecter les mssages dans le html
+function injecteMsgErrHtml(msgErr, inputTag, inputErrPosition, isEmail) {
+  const inputErr = document.querySelector(inputErrPosition);
+  const spanErr = document.createElement("span");
+  spanErr.innerText = msgErr;
+  inputErr.appendChild(spanErr);
+  inputTag.className += " fromBorderErr";
+  if (isEmail) {
+    inputTag.appendChild(spanErr);
+    inputTag.className += " margBoxEmail";
+    suprimeMsgErrEmail(spanErr, inputTag, inputErr);
+  }
+  supprimeMsgErr(inputTag, spanErr);
+}
+
+// pour supprimer msg err lorsque on focus sur un de les deux input de l'e-mail
+function suprimeMsgErrEmail(sepanErrElmenet,inputTag,inputErr ) {
+  inputErr.addEventListener("focus", (event) => {
+    inputTag.classList.remove("fromBorderErr");
+    inputTag.classList.remove("margBoxEmail");
+    sepanErrElmenet.remove();
+  });
+  const emailCon = document.querySelector("#emailCon");
+  emailCon.addEventListener("focus", (event) => {
+    inputTag.classList.remove("fromBorderErr");
+    inputTag.classList.remove("margBoxEmail");
     sepanErrElmenet.remove();
   });
 }
