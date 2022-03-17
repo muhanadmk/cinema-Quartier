@@ -64,15 +64,15 @@
           <div>
             <div id="nomErr" class="form-input">
               <label id="labNom" for="nom">nom :</label>
-              <input type="text" class="form-control nom" id="nom" name="nom" placeholder="almokdad" >
+              <input type="text" class="form-control nom" id="nom" name="nom" placeholder="almokdad" required>
             </div>
             <div id="prenomErr" class="form-input">
               <label for="prenom">prenom :</label>
-              <input type="text" class="form-control" id="prenom" name="prenom" placeholder="muhanad" >
+              <input type="text" class="form-control" id="prenom" name="prenom" placeholder="muhanad" required>
             </div>
             <div class="form-input">
               <label for="civilite">civilité :</label>
-              <select  class="form-select" id="civilite" name="civilite">
+              <select  class="form-select" id="civilite" name="civilite" required>
                 <option value="Homme">Homme</option>
                 <option value="femme">femme</option>
               </select>
@@ -80,15 +80,17 @@
             <div id="dateErr" class="form-input">
               <label for="date_de_naissance">date de naissance :</label>
               <input class="form-control" type="date" id="date_de_naissance" name="date_de_naissance"
-                placeholder="02/02/1998">
+                placeholder="02/02/1998" required>
             </div>
-            <div id="emailErr" class="form-input">
-              <label for="email">E-email :</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" >
-            </div>
-            <div id="emailConErr" class="form-input">
-              <label for="emailCon">E-email conformation :</label>
-              <input type="email" class="form-control" id="emailCon" name="emailCon" placeholder="name@example.com" >
+            <div id="borderErrEmail">
+              <div id="emailErr" class="form-input">
+                <label for="email">E-email :</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+              </div>
+              <div id="emailConErr" class="form-input">
+                <label for="emailCon">E-email conformation :</label>
+                <input type="email" class="form-control" id="emailCon" name="emailCon" placeholder="name@example.com" required>
+              </div>
             </div>
           </div>
 
@@ -97,21 +99,21 @@
           <div>
             <div id="numeroRueErr" class="form-input">
               <label for="numeroRue">n°:</label>
-              <input type="text" class="form-control" id="numeroRue" name="numeroRue" placeholder="15">
+              <input type="text" class="form-control" id="numeroRue" name="numeroRue" placeholder="15" required>
             </div>
             <div id="nomRueErr" class="form-input">
               <label for="nomRue"> rue:</label>
-              <input type="text" class="form-control" id="nomRue" name="nomRue" placeholder="rue du crosne">
+              <input type="text" class="form-control" id="nomRue" name="nomRue" placeholder="rue du crosne" required>
             </div>
           </div>
           <div>
             <div id="cpErr" class="form-input">
               <label for="cp"> CP :</label>
-              <input type="text" class="form-control" id="cp" name="cp" placeholder="54000">
+              <input type="text" class="form-control" id="cp" name="cp" placeholder="54000" required>
             </div>
             <div id="villeErr" class="form-input">
               <label for="ville">ville:</label>
-              <input type="text" class="form-control" id="ville" name="ville" placeholder="ville">
+              <input type="text" class="form-control" id="ville" name="ville" placeholder="ville" required>
             </div>
           </div>
           <div class="d-flex justify-content-center mt-5 mb-5">

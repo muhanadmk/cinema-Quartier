@@ -46,10 +46,11 @@ html {
 .fromBorderErr {
   border: 3px solid red;
 }
+.margBoxEmail{
+  margin:10px 0 10px 0 ;
 
-input:focus {
-  outline: none;
 }
+
 .footer_parent{
   display : table-row;
   height: 20%;
